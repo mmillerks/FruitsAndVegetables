@@ -13,7 +13,7 @@ const Index extends React.Component {
                 {
                     fruits.map(fruit, i) => {
                         return (
-                            <li><a href={`/fruits/${i}`}>{fruit.name}</a> is the color of {fruits.color}</li>
+                            <li key={`${fruit._id}`}><a href={`/fruits/${i}`}>{fruit.name}</a> is the color of {fruits.color}</li>
                         )
                     })
                 }

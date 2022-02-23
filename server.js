@@ -1,13 +1,22 @@
 require('dotenv').config();
+console.log(process.env.MONGO_URI)
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
-const fruits = require('./models/fruits');
+const Fruit = require('./models/fruits');
 const vegetables = require('./models/vegetables');
 
-    
+//MVC SET_UP
+//views    
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
-
+//models
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+});
 
 //MIDDLEWEAR
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +29,15 @@ app.use((req, res, next) => {
 
 //Index - week 10 day 3
 app.get('/fruits', function(req, res) {
-    res.render('fruits/Index', { fruits: fruits });
+    Fruit.find({}, (err, foundFruits) => {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            res.render('fruits/Index', {
+                fruits: foundFruits
+            })
+        }
+    })
 });
 
 app.get('/vegetables', function(req, res) {
@@ -52,8 +69,15 @@ app.post('/fruits', (req, res) => {
     } else {
         req.body.readyToEat = false
     }
-    fruits.push(req.body)
-    res.redirect('fruits/Show')
+    
+    Fruit.create(req.body, (err, createdFruit) => {
+        if (err) {
+            res.status(403).send(err)
+        } else {
+            console.log(createdFruit)
+            res.redirect('/fruits')
+        }
+    })
 });
 
 
@@ -71,11 +95,19 @@ app.post('/vegetable', (req, res) => {
 //Edit
 
 //Show week 10 day 3
-app.get('/fruits/:indexOfFruitsArray', (req, res) =>{
-    res.send(fruits[req.params.indexOfFruitsArray])
-})
+app.get('/fruits/:id', (req, res) =>{
+    Fruit.findById(req.params.id, (err, foundFruit) => {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            res.render('fruits/Show', {
+                fruit: foundFruit
+            })
+        }
+    })
+});
 
-app.get('/vegetables/:indexOfVegetablesArray', (req, res) =>{
+app.get('/vegetables/:indexOfVegetablesArray', (req, res) => {
     res.send(vegetables[req.params.indexOfVegetablesArray])
 })
 

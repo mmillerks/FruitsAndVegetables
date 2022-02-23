@@ -8,9 +8,9 @@ class Show extends React.Component {
       <h1> Show Page </h1>
       <a href="/fruits">Go back to Home Page</a>
       <p>The {fruit.name} is {fruit.color}</p>
-      <p>{fruit.readyToEat? 'Its is ready to eat' : 'It is not ready to eat... Cant touch this' }</p>
+      <p>{fruit.readyToEat? 'It is ready to eat' : 'It is not ready to eat... Cant touch this' }</p>
       </div>
       );
      }
    }
-  module.exports  = Show;
+  module.exports = Show;

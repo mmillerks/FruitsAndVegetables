@@ -13,12 +13,12 @@ const vegetables = [
         name: 'broccoli',
         color: 'green',
         readyToEat: true
-    }
+    },
     {
         name: 'onion',
         color: 'white',
         readyToEat: no
-    }
+    },
     {
         name: 'peas',
         color: 'green',
