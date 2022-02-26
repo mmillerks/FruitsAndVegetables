@@ -6,7 +6,6 @@ const fruitsSchema = new mongoose.Schema({
     readyToEat: Boolean
 });
 
-const Fruit = mongoose.model('Fruit', fruitSchema;
-)
+const Fruit = mongoose.model('Fruit', fruitsSchema);
 
 module.exports = Fruit;

@@ -4,7 +4,7 @@ class New extends React.Component {
     render(){
         return(
         <div>
-            <h1>Hi, this is the New Page.</h1>
+            <h1>Hi, this is the New Vegetable Page.</h1>
             { /* This is how you make a comment. */}
             <nav>
             <a href="/vegetables/new">Back to Vegetables Index Page</a>

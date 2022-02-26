@@ -1,16 +1,18 @@
 const React = require('react')
 
 class Show extends React.Component {
-  render () {
-   const fruit = this.props.fruit
-    return (
-      <div>
-      <h1> Show Page </h1>
-      <a href="/fruits">Go back to Home Page</a>
-      <p>The {fruit.name} is {fruit.color}</p>
-      <p>{fruit.readyToEat? 'It is ready to eat' : 'It is not ready to eat... Cant touch this' }</p>
-      </div>
-      );
-     }
-   }
-  module.exports = Show;
+  render(){
+      const fruit = this.props.fruit;
+      return (
+          <div>
+              <h1>This is the Show Page for {fruit.name.toUpperCase()} </h1>
+              <a href={`/fruits/${fruit._id}/edit`}>Edit This Fruit</a>
+              <a href="/fruits">Go Back to the index</a>
+              <p>{fruit.name} is the color of {fruit.color}</p>
+              <p>The {fruit.name} is {fruit.readyToEat ? 'ready to eat' : 'not ready to eat... Can\'t touch this'}</p>
+          </div>
+      );  
+  }
+}
+
+module.exports = Show;

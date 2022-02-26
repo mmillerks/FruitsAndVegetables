@@ -1,24 +1,32 @@
 const React = require('react')
+const Default = require('../layout/Default.jsx')
 
-const Index extends React.Component {
+class Index extends React.Component {
     render() {
-        const fruits = this.props.fruits
+        const fruits = this.props.fruits      
+        const fruitList = fruits.map((fruit, i) => {
+            return (
+                <li key={`${i}`}>
+                    <a href={`/fruits/${fruit._id}`}>{fruit.name} is this the color of {fruits.color} </a> 
+                    <form action={`/fruits/${fruit._id}?_method=DELETE`} method="POST">
+                        <input type="submit" value={`DELETE ${fruit.name.toUpperCase()}`} />
+                    </form>
+                </li>  
+            )
+        })
+
         return (
-            <div>
-                <h1>This is the Index Page of My Beautiful Collection of Fruit.</h1>
-                <nav>
-                    <a href="/fruits/new">Go to the New Page</a>
-                </nav>
-                <ul>
-                {
-                    fruits.map(fruit, i) => {
-                        return (
-                            <li key={`${fruit._id}`}><a href={`/fruits/${i}`}>{fruit.name}</a> is the color of {fruits.color}</li>
-                        )
-                    })
-                }
-                </ul>
-            </div>
+            <Default title ="Index Page">
+                <div>
+                    <h1>This is the Index Page of My Beautiful Collection of Fruit.</h1>
+                    <nav>
+                        <a href="/fruits/new">Go to the New Page</a>
+                    </nav>
+                    <ul>
+                        {fruitList}
+                    </ul>
+                </div>
+            </Default>
         )
     }
 
